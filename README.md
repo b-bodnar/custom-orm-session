@@ -22,4 +22,4 @@
 5. Implement methods in a such way, that they **create corresponding actions** and **add them to the queue** called `actionQueue`. Make that queue an ordered one, so **insert actions should be performed before delete actions**.
 6. Implement method `flush` that goes through all actions and **performs corresponding SQL statements**.
 7. Update session so it calls `flush` before closing
-* Refactor your dirty checking mechanism so it creates `UpdateAction` and adds it to the queue
+8. Refactor your dirty checking mechanism so it creates `UpdateAction` and adds it to the queue
