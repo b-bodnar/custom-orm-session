@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import static com.bobocode.util.NameUtil.getColumnName;
 import static com.bobocode.util.NameUtil.getTableName;
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.joining;
 
 @UtilityClass
@@ -36,6 +37,7 @@ public class SqlBuilder {
     private static String getFieldNameFromEntityForUpdateQuery(BaseEntity entity) {
         var fields = entity.getClass().getDeclaredFields();
         return Stream.of(fields)
+                .sorted(comparing(Field::getName))
                 .map(SqlBuilder::getFieldNameWithPlaceholderForUpdateQuery)
                 .collect(joining(", "));
     }
