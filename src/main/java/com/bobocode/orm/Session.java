@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 
 import static com.bobocode.orm.SqlBuilder.findByIdQuery;
 import static com.bobocode.util.NameUtil.getColumnName;
+import static java.util.Comparator.comparing;
 
 @RequiredArgsConstructor
 public class Session {
@@ -122,6 +123,7 @@ public class Session {
             AtomicInteger index = new AtomicInteger(1);
 
             Stream.of(fields)
+                    .sorted(comparing(Field::getName))
                     .forEach(fillPreparedStatement(entity, preparedStatement, index));
             preparedStatement.setObject(index.get(), entity.id);
             preparedStatement.executeUpdate();
@@ -159,7 +161,7 @@ public class Session {
     private List<Object> getFieldValues(BaseEntity entity) {
         List<Object> fieldValues = new ArrayList<>();
         List<Field> sortedFields = Arrays.stream(entity.getClass().getDeclaredFields())
-                .sorted(Comparator.comparing(Field::getName)).toList();
+                .sorted(comparing(Field::getName)).toList();
 
         for (Field field : sortedFields) {
             field.setAccessible(true);
