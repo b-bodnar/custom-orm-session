@@ -22,8 +22,8 @@ import static com.bobocode.util.NameUtil.getColumnName;
 @RequiredArgsConstructor
 public class Session {
     private final DataSource dataSource;
-    private Map<EntityKey<?>, BaseEntity> cachedEntities = new HashMap<>();
-    private Map<EntityKey<?>, List<Object>> snapshot = new HashMap<>();
+    private final Map<EntityKey<?>, BaseEntity> cachedEntities = new HashMap<>();
+    private final Map<EntityKey<?>, List<Object>> snapshot = new HashMap<>();
 
     /**
      * Search for an entity of the specified class and primary key.
